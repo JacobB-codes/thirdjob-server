@@ -1,0 +1,9 @@
+{
+  "type": "mysql",
+  "host": "gji4qdmyqxxg.us-west-2.psdb.cloud",
+  "username": "0hog9xjx2roy",
+  "password": "pscale_pw_IR_z1QZu01ZLfSARecegvNpW72X_9j1Ykf1yNtJL7VQ",
+  "database": "thirdjob",
+  "entities": ["src/entities/*.ts"],
+  "migrations": ["src/migrations/*.ts"]
+}
