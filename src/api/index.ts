@@ -26,14 +26,14 @@ dotenv.config();
 
 const initializeDatabase = async () => {
   const orm = new DataSource({
-    type: "mysql",
+    type: "postgres",
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    ssl: true,
-    logging: true,
-    // synchronize: true,
+    ssl: __prod__,
+    logging: !__prod__,
+    synchronize: !__prod__,
     migrations: [path.join(__dirname, "../migrations/*")],
     entities: [Job, User],
   });
@@ -50,7 +50,7 @@ const app = express();
 // (going to use redis _in_ apollo - so thats important)
 const RedisStore = connectRedis(session);
 const redis = new Redis(
-  `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+  `rediss://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
 );
 app.use(
   cors({
@@ -72,7 +72,7 @@ app.use(
       secure: __prod__, // cookie only works in https
     },
     saveUninitialized: false, // dont store empty sessions
-    secret: "beepbeepboopbop",
+    secret: process.env.SESSION_SECRET!,
     resave: false,
   })
 );
