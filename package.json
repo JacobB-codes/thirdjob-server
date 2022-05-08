@@ -7,7 +7,7 @@
     "watch": "tsc -w",
     "dev": "nodemon dist/dev.js",
     "start": "node dist/dev.js",
-    "start2": "ts-node src/dev.ts",
+    "startTs": "ts-node src/dev.ts",
     "dev2": "nodemon --exec ts-node src/dev.ts"
   },
   "keywords": [],
