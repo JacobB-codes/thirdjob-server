@@ -96,6 +96,7 @@ const startApolloServer = async (app: any, httpServer: any) => {
   apolloServer.applyMiddleware({
     app,
     cors: false,
+    path: "/api",
   });
 };
 
