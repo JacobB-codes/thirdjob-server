@@ -54,7 +54,11 @@ const redis = new Redis(
 );
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+    origin: [
+      "http://localhost:3000",
+      "https://studio.apollographql.com",
+      "https://thirdjob-ui.vercel.app",
+    ],
     credentials: true,
   })
 );
