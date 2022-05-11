@@ -106,6 +106,8 @@ const startApolloServer = async (app: any, httpServer: any) => {
 
 startApolloServer(app, httpServer);
 
-httpServer.listen(process.env.PORT || 4000);
+const port = process.env.PORT || 4000;
+
+httpServer.listen(port);
 
 export default httpServer;
