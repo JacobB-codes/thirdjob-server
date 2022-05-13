@@ -31,7 +31,7 @@ const initializeDatabase = async () => {
     host: process.env.DB_HOST,
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    ssl: __prod__,
+    ssl: false,
     logging: !__prod__,
     synchronize: !__prod__,
     migrations: [path.join(__dirname, "../migrations/*")],
