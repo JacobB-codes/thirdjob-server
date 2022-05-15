@@ -49,16 +49,14 @@ const app = express();
 // redis middleware will run before apollo
 // (going to use redis _in_ apollo - so thats important)
 const RedisStore = connectRedis(session);
-const redis = new Redis(
-  `rediss://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
-);
+const redis = __prod__
+  ? new Redis(
+      `rediss://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+    )
+  : new Redis(+process.env.REDIS_PORT, process.env.REDIS_HOST);
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://studio.apollographql.com",
-      "https://thirdjob-ui.vercel.app",
-    ],
+    origin: process.env.ALLOWED_ORIGINS!.split(","),
     credentials: true,
   })
 );
@@ -105,8 +103,6 @@ const startApolloServer = async (app: any, httpServer: any) => {
 
 startApolloServer(app, httpServer);
 
-const port = process.env.PORT || 4000;
-
-httpServer.listen(port);
+if (__prod__) httpServer.listen(process.env.PORT || 4000);
 
 export default httpServer;
