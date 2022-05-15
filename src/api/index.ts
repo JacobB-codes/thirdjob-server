@@ -54,6 +54,7 @@ const redis = __prod__
       `rediss://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
     )
   : new Redis(+process.env.REDIS_PORT, process.env.REDIS_HOST);
+app.set("trust proxy", 1);
 app.use(
   cors({
     origin: process.env.ALLOWED_ORIGINS!.split(","),
