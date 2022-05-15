@@ -73,7 +73,6 @@ app.use(
       httpOnly: true, // browser not able to access session
       sameSite: "lax", // csrf
       secure: __prod__, // cookie only works in https
-      domain: __prod__ ? ".vercel.app" : undefined,
     },
     saveUninitialized: false, // dont store empty sessions
     secret: process.env.SESSION_SECRET!,
