@@ -145,7 +145,6 @@ export class UserResolver {
         password: hashedPassword,
         email: options.email,
       }).save();
-      console.log("user", user);
     } catch (err) {
       if (err.code === "23505" || err.detail.include("already exists")) {
         //duplocate username error
