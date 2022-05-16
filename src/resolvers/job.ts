@@ -7,6 +7,7 @@ import {
   InputType,
   Int,
   Mutation,
+  ObjectType,
   Query,
   Resolver,
   Root,
@@ -24,6 +25,14 @@ class JobInput {
   description: string;
 }
 
+@ObjectType()
+class PaginatedJobs {
+  @Field(() => [Job])
+  jobs: Job[];
+  @Field()
+  hasMore: boolean;
+}
+
 @Resolver(Job)
 export class JobResolver {
   @FieldResolver(() => String)
@@ -31,17 +40,23 @@ export class JobResolver {
     return root.description.slice(0, 50);
   }
 
-  @Query(() => [Job])
+  @Query(() => PaginatedJobs)
   async jobs(
     @Arg("limit", () => Int, { nullable: true }) limit: number | null,
     @Arg("cursor", () => String, { nullable: true }) cursor: string | null
-  ): Promise<Job[]> {
+  ): Promise<PaginatedJobs> {
     const realLimit = limit ? Math.min(50, limit) : 50;
-    return await Job.find({
+    const realLimitPlusOne = realLimit + 1;
+    const jobs = await Job.find({
       where: cursor ? { createdAt: LessThan(new Date(+cursor)) } : {},
-      order: { createdAt: "DESC" },
-      take: realLimit,
+      order: { createdAt: "DESC", id: "DESC" },
+      take: realLimitPlusOne,
     });
+
+    return {
+      jobs: jobs.slice(0, realLimit),
+      hasMore: jobs.length === realLimitPlusOne,
+    };
   }
 
   @Query(() => Job, { nullable: true })
