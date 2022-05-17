@@ -64,7 +64,7 @@ export class JobResolver {
 
   @Query(() => Job, { nullable: true })
   job(@Arg("id", () => Int) id: number): Promise<Job | null> {
-    return Job.findOne({ where: { id } });
+    return Job.findOne({ where: { id }, relations: { creator: true } });
   }
 
   @Mutation(() => Job)
