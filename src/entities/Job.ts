@@ -29,6 +29,7 @@ export class Job extends BaseEntity {
   @Column()
   creatorId: number;
 
+  @Field()
   @ManyToOne(() => User, (user) => user.jobs)
   creator: User;
 

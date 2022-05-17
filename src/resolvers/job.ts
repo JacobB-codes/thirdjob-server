@@ -49,6 +49,9 @@ export class JobResolver {
     const realLimitPlusOne = realLimit + 1;
     const jobs = await Job.find({
       where: cursor ? { createdAt: LessThan(new Date(+cursor)) } : {},
+      relations: {
+        creator: true,
+      },
       order: { createdAt: "DESC", id: "DESC" },
       take: realLimitPlusOne,
     });
