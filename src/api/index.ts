@@ -73,6 +73,7 @@ app.use(
       httpOnly: true, // browser not able to access session
       sameSite: "lax", // csrf
       secure: __prod__, // cookie only works in https
+      domain: __prod__ ? process.env.TRUST_COOKIE_DOMAIN : undefined,
     },
     saveUninitialized: false, // dont store empty sessions
     secret: process.env.SESSION_SECRET!,
