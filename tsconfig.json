@@ -24,5 +24,13 @@
     "baseUrl": "."
   },
   "exclude": ["node_modules"],
-  "include": ["./src/**/*.ts"]
+  "include": [
+    "./*.ts",
+    "./entities/**/*.ts",
+    "./middleware/**/*.ts",
+    "./migrations/**/*.ts",
+    "./resolvers/**/*.ts",
+    "./utils/**/*.ts",
+    "api/index.ts"
+  ]
 }

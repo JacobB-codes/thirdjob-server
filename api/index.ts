@@ -1,23 +1,23 @@
 import "reflect-metadata";
-import { COOKIE_NAME, __prod__ } from "./constants";
+import { COOKIE_NAME, __prod__ } from "../constants";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { HelloResolver } from "./resolvers/hello";
-import { JobResolver } from "./resolvers/job";
-import { UserResolver } from "./resolvers/user";
+import { HelloResolver } from "../resolvers/hello";
+import { JobResolver } from "../resolvers/job";
+import { UserResolver } from "../resolvers/user";
 import Redis from "ioredis";
 import session from "express-session";
 import connectRedis from "connect-redis";
-import { MyContext } from "./types";
+import { MyContext } from "../types";
 import {
   ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginDrainHttpServer,
 } from "apollo-server-core";
 import cors from "cors";
 import { DataSource } from "typeorm";
-import { Job } from "./entities/Job";
-import { User } from "./entities/User";
+import { Job } from "../entities/Job";
+import { User } from "../entities/User";
 import * as dotenv from "dotenv";
 import path from "path";
 import http from "http";
@@ -96,6 +96,7 @@ const startApolloServer = async (app: any, httpServer: any) => {
   apolloServer.applyMiddleware({
     app,
     cors: false,
+    path: "/graphql",
   });
 };
 

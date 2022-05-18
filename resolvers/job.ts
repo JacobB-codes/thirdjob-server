@@ -13,7 +13,7 @@ import {
   Root,
   UseMiddleware,
 } from "type-graphql";
-import { MyContext } from "src/types";
+import { MyContext } from "../types";
 import { isAuth } from "../middleware/isAuth";
 import { LessThan } from "typeorm";
 
