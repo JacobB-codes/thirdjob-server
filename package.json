@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "watch": "tsc -w",
     "dev": "nodemon dist/api/index.js",
     "start": "node dist/api/index.js",
-    "build": "tsc && node dist/api/index.js",
+    "build": "tsc",
     "start2": "ts-node api/index.ts",
     "dev2": "nodemon --exec ts-node api/index.ts"
   },
