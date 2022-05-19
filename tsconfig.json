@@ -23,14 +23,5 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "exclude": ["node_modules"],
-  "include": [
-    "./*.ts",
-    "./entities/**/*.ts",
-    "./middleware/**/*.ts",
-    "./migrations/**/*.ts",
-    "./resolvers/**/*.ts",
-    "./utils/**/*.ts",
-    "api/index.ts"
-  ]
+  "exclude": ["node_modules"]
 }
